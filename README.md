@@ -5,4 +5,4 @@
 
 [![NPM](https://nodei.co/npm/discordjs-advanced.png?downloads=true&downloadRank=true&stars=true)](https://npmjs.com/package/discordjs-advanced/)
 
-Detaylı bilgiyi [buradan](https://discordjs-advanced.github.io/) alabilirsiniz.
+Detaylı bilgiyi [![DiscordJS-Advanced](buradan)](https://discordjs-advanced.github.io/) alabilirsiniz.

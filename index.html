@@ -1,0 +1,392 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="./styles/vs2015.css">
+        <script src="./highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        
+        <link rel="stylesheet" href="./x.css">
+        <script src="./x.js"></script>
+
+        <link rel="icon" href="./icon.png">
+    </head>
+
+    <body>
+
+        <div class="tab">
+            <button class="tablinks active" onclick="x(event, 'baslangic')">Hoş geldiniz</button>
+            <br>
+            <a class="tablinks orns">Başlangıç</a>
+            <button class="tablinks" onclick="x(event, 'botanadosya')">Clienti/Botu Çalıştırma</button>
+            <button class="tablinks" onclick="x(event, 'botayarlar')">Client/Bot Ayarları</button>
+            <button class="tablinks" onclick="x(event, 'eventler')">Eventler</button>
+            <br>
+            <a class="tablinks orns">Veritabanı Sistemi</a>
+            <button class="tablinks" onclick="x(event, 'veritabanıKurulum')">Kurulum</button>
+            <button class="tablinks" onclick="x(event, 'veritabanıFonksiyonları')">Fonksiyonlar</button>
+            <button class="tablinks" onclick="x(event, 'veritabanıKullanım')">Örnek</button>
+            <br>
+            <a class="tablinks orns">Komut Taslağı</a>
+            <button class="tablinks" onclick="x(event, 'argsYoksa')">Argüman (args) yoksa</button>
+            <button clsas="tablinks" onclick="x(event, 'argsVarsa')">Argüman (args) varsa</button>
+        </div>
+
+        <div id="baslangic" class="tabcontent" style="display: block;">
+            <br>
+            <center><a href="https://www.npmjs.com/package/discordjs-advanced"><img src="https://nodei.co/npm/discordjs-advanced.png?downloads=true&downloadRank=true&stars=true" alt="NPM Sayfası"></a></center>
+            <h1><b>Hoş geldiniz</b></h1>
+            <p>
+                Öncelikle kodlama üzerinde JavaScript programlama dilinin Node.JS programında bilginiz olmalı.
+                <br>
+                Yeterli bilgiye sahipseniz <a href="https://www.npmjs.com/package/discordjs-advanced" style="color:lightseagreen; text-decoration:none; outline:none;" target="_blank"><b>discordjs-advanced</b></a> NPM modülünü kurunuz.
+                <br>
+                Sonrasında modülün kullanımı ile ilgili örneklerin ve bilgilendirmelerin butonlarını sol tarafda görebilirsiniz.
+                <br><br>
+                Aynı zamanda "yardım, ön-ek, eval, load, unload ve reload" komutları varsayılan komutlardır sizin eklemenize gerek yoktur botta otomatik olarak bulunacaktır.
+            </p>
+        </div>
+
+        <div id="botanadosya" class="tabcontent">
+            <h1><b>Bot ana dosyası (bot.js, app.js, index.js vs.) örneği</b></h1>
+            <pre>
+                <code class="javascript">
+    const Advanced = require('discordjs-advanced');
+                         
+    const client = new Advanced.Client({
+        token: "", //Botunuzun Discord Applications sayfasındaki token bilgisi.
+        prefix: "", //Botunuzun ön-ek'i.
+        sahip: [""], //"" içine bot sahibinin Discord ID bilgisi. Birden fazla sahip eklenebilir. Örneğin; sahip: ["id1", "id2"], gibi. NOT: Botun profilini oluşturan kişiyi ID'i yazılmasa bile otomatik olarak sahip olarak ekler.
+        komutDosya: "", //"" kısmına botunuzun komutlarının bulunacağı klasör adını yazınız. Örneğin: komutDosya: "komutlar"
+        //İsteğe bağlı alan -|
+        varsayılanKomutlar: [] 
+        /*Burada "[]" içine '' kullanarak (örneğin: varsayılanKomutlar: ['yardım']) eklediğiniz varsayılan komutlar devre dışı olacaktır.
+        Tüm varsayılan komutları devre dışı bırakacaksanız varsayılanKomutlar: 'hepsi' şeklinde yazınız.*/
+
+        everyoneKapat: true
+        /*Burada botun @here  ve @everyone etiketi atmasını engelliyoruz. Bunu false yaparsanız veya everyoneKapat kısmı hiç eklemezsiniz bot @here ve @everyone etiketi atabilir.*/
+        //İsteğe bağlı alan -|
+    });
+                         
+    client.kategoriYükle([ //Burada kategorileri belirtiyoruz.
+        ['test', 'Test Komutları'] /*Burada 'test' kısmı komutlarınızın olacağı klasörde 'test' adında bir klasör oluşturmanız gerektiğini bildirecektir.
+        Aynı zamanda buradaki 'test' kısmı komutların kategori bölümüne yazılacak veri yerine geçebilir.
+        'test' kısmı kategori adı olup, 'Test Komutları' kısmı yardım komutunda görünecdek kısımdır. 
+        (Yardım komutunu eklemenize gerek yoktur. Yardım komutunu "discordjs-advanced" paketi otomatik olarak eklemiştir. Sadece yardım komutu değil, bazı varsayılan komutlar da bulunmaktadır.)
+                            
+        kategoriYükle fonksiyonunda ['test', 'Test Komutları'] bölümünü silip kendinize göre ekleyebilirsiniz.
+        Örneğin;
+            client.kategoriYükle([
+                ['moderasyon', 'Moderasyon Komutları'],
+                ['eğlence', 'Eğlence Komutları']
+             ]);*/
+    ]);
+                         
+    client.giris(); //Botun giriş yapmasını sağlıyoruz. () arasına herhangi bir şey yazılmamaktadır.
+                </code>
+            </pre>
+        </div>
+
+        <div id="botayarlar" class="tabcontent">
+            <h1><b>Client/Bot ayarlarının özellikleri</b></h1>
+            <table>
+                <tr>
+                    <th>Değer</th>
+                    <th>Açıklama</th>
+                    <th>Varsayılan</th>
+                    <th>Veri Tipi</th>
+                    <th>Durum</th>
+                </tr>
+                <tr>
+                    <td>token</td>
+                    <td>Botun Discord Applications sayfasındaki token bilgisi.</td>
+                    <td>Bulunmuyor</td>
+                    <td>String</td>
+                    <td>Zorunlu</td>
+                </tr>
+                <tr>
+                    <td>prefix</td>
+                    <td>Botun ön ekini ayarlar.</td>
+                    <td>Bulunmuyor</td>
+                    <td>String</td>
+                    <td>Zorunlu</td>
+                </tr>
+                <tr>
+                    <td>komutDosya</td>
+                    <td>Botun komutlarının olacağı klasörü ayarlar.</td>
+                    <td>komutlar</td>
+                    <td>String</td>
+                    <td>Zorunlu</td>
+                </tr>
+                <tr>
+                    <td>sahip</td>
+                    <td>Botun sahiplerini ayarlar. Botun profilini oluşturan kişinin eklenmesine gerek yoktur.</td>
+                    <td>Botun profilini oluşturan kişi</td>
+                    <td>Array</td>
+                    <td>İsteğe bağlı</td>
+                </tr>
+                <tr>
+                    <td>everyoneKapat</td>
+                    <td>Botun @everyone ve @here etiketi atabilmesini kapatıp açmayı sağlar.</td>
+                    <td>false</td>
+                    <td>Boolean</td>
+                    <td>İsteğe bağlı</td>
+                </tr>
+                <tr>
+                    <td>varsayılanKomutlar</td>
+                    <td>Modülün sağladığı varsayılan komutlardan belirtilenleri kapatır.</td>
+                    <td>Bulunmuyor</td>
+                    <td>Array</td>
+                    <td>İsteğe bağlı</td>
+                </tr>
+                <tr>
+                    <td>veritabanı > dosya</td>
+                    <td>Belirtilen dosyayı botun veritabanı sistemi dosyası olarak ayarlar.</td>
+                    <td>Bulunmuyor</td>
+                    <td>String</td>
+                    <td>İsteğe bağlı</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="eventler" class="tabcontent">
+            <h1><b>Ayrı dosya olarak event kurulum örneği</b></h1>
+            <p>Bot ana dosyasına bir şey ekleyerek bunu gerçekleştirebilirsiniz.</p>
+            <pre>
+                <code class="javascript">
+    const Advanced = require('discordjs-advanced');
+                         
+    const client = new Advanced.Client({
+        token: "", //Botunuzun Discord Applications sayfasındaki token bilgisi.
+        prefix: "", //Botunuzun ön-ek'i.
+        sahip: [""], //"" içine bot sahibinin Discord ID bilgisi. Birden fazla sahip eklenebilir. Örneğin; sahip: ["id1", "id2"], gibi
+        komutDosya: "" //"" kısmına botunuzun komutlarının bulunacağı klasör adını yazınız. Örneğin: komutDosya: "komutlar"
+    });
+                         
+    client.eventYükle('klasör adı'); //Burada "klasör adı" yazan yere event dosyalarının olacağı klasörün adını yazınız.
+        /*Burada eventleri yüklemeyi aktif ettik bu olmadan event kullanabilir miydik?
+        - Evet.
+        Şimdi burada hata almamak için botunuzun klasöründe "client.eventYükle('klasör adı')" 'klasör adı' kısmına yazdığınz isimde bir klasör açın.
+        Diyelimki bir event dosyası açacağız "message.js" (bu dosyaların adları event adları ile uyumlu olmalı).
+        "message.js" içine gelebilecek örnek bir kodu aşağıdaki ilk başlıkta görebilirsiniz.
+        */
+                         
+    client.kategoriYükle([ //Burada kategorileri belirtiyoruz.
+        ['test', 'Test Komutları'] /*Burada 'test' kısmı komutlarınızın olacağı klasörde 'test' adında bir klasör oluşturmanız gerektiğini bildirecektir.
+        Aynı zamanda buradaki 'test' kısmı komutların kategori bölümüne yazılacak veri yerine geçebilir.
+        'test' kısmı kategori adı olup, 'Test Komutları' kısmı yardım komutunda görünecdek kısımdır. 
+        (Yardım komutunu eklemenize gerek yoktur. Yardım komutunu "discordjs-advanced" paketi otomatik olarak eklemiştir. Sadece yardım komutu değil, bazı varsayılan komutlar da bulunmaktadır.)
+                            
+        kategoriYükle fonksiyonunda ['test', 'Test Komutları'] bölümünü silip kendinize göre ekleyebilirsiniz.
+        Örneğin;
+            client.kategoriYükle([
+                ['moderasyon', 'Moderasyon Komutları'],
+                ['eğlence', 'Eğlence Komutları']
+            ]);*/
+    ]);
+                         
+    client.giris(); //Botun giriş yapmasını sağlıyoruz. () arasına herhangi bir şey yazılmamaktadır.
+                </code>
+            </pre>
+            <h1><b>Ayrı dosya olarak event örneği</b></h1>
+            <p>Örneğin aşağıdaki kod "message.js" içindir.
+            <br>
+            Kodda gördüğünüz "module.exports = (message)" kısmında "message" yazan yere o eventi tanımladığımız şey gelmektedir.
+            <br>
+            Yani "module.exports = (message)" kısmında "message" yazan yere "msg" de gelebilir. Burdan ne demek istediğimi anladınız.
+            <br>
+            Eğer event "ready" eventi ise (yani dosyanız "ready.js" ise) "module.exports = ()" kısmında "()" içine yazdığınız şey botu (client'i) belirtir.
+            <br>
+            Örneğin bu "guildCreate" eventinde "guild" olarak değişiklik gösterir.
+            <br>
+            Eventleri iyice öğrenirseniz ayrı dosya halinde yapmakta zorluk çekmezsiniz.
+            <br>
+            Ayrı dosya halinde yapılabilmesinin sağlanma sebebide 1000 satırlık bir kodu bot ana dosyasında yazarsanız çok yer kaplar ve karışık olur.
+            <br>
+            Ayrı bir dosya içinde daha rahat yazabilirsiniz.</p>
+            <pre>
+                <code class="javascript">
+    module.exports = (message) => {
+        //Burada "client.on("message" => vs.)" şeklinde event açıp kullandığınız kodları kullanırsanız sorunsuz işler.
+        if (message.content.toLowerCase() === 'ok') {
+            message.channel.send('Yay!')
+        } //mesaj büyük harfler ile yazılsa bile küçülterek 'ok' kelimesine eşit değilmi, eşit mi bakıyor ve ona göre tepki veriyor.
+        if (message.content.toLowerCase() === 'yay') {
+            message.channel.send('Ok!')
+        } //mesaj büyük harfler ile yazılsa bile küçülterek 'yay' kelimesine eşit değilmi, eşit mi bakıyor ve ona göre tepki veriyor.
+    };
+                </code>
+            </pre>
+        </div>
+
+        <div id="veritabanıKurulum" class="tabcontent">
+            <h1><b>Veritabanı sistemi kurulum örneği</b></h1>
+            <pre>
+                <code class="javascript">
+    const Advanced = require('discordjs-advanced');
+                         
+    const client = new Advanced.Client({
+        token: "",
+        prefix: "",
+        sahip: [""],
+        komutDosya: "",
+        //"Botu Çalıştırma" bölümün de botu "discordjs-advanced" ile aktif etmeyi öğrendik. Yani bu yazıdan üstteki bilgileri doldurabilirsiniz.
+        //Veritabanı sisteminin aktif hale gelmesi için tek yapmanız gereken aşağıdaki veriyi eklemek.
+        veritabanı: {
+            dosya: "" /*Burada "" içine veritabanı dosyanızın adını yazacaksınız. Veritabanı olarak JSON kullanılmaktadır. Yani dosyanızın sonu ".json" ile bitmeli.
+            Örneğin;
+            veritabanı: {
+                dosya: "db.json"
+            }*/
+            //Tabi "x.json" (Örneğin; "db.json") dosyasını botun klasöründe oluşturacaksınız. 
+        }
+    });
+                         
+    client.kategoriYükle([
+        ['test', 'Test Komutları']
+    ]);
+                         
+    client.giris();
+                </code>
+            </pre>
+        </div>
+
+        <div id="veritabanıFonksiyonları" class="tabcontent">
+            <h1><b>Veritabanı sistemi fonksiyonları</b></h1>
+            <table>
+                <tr>
+                    <th>Fonksiyon</th>
+                    <th>Açıklaması</th>
+                </tr>
+                <tr>
+                    <td>ayarla</td>
+                    <td>Verilen veriye verilen değeri kaydeder.</td>
+                </tr>
+                <tr>
+                    <td>sil</td>
+                    <td>Verilen veriyi ve içindeki tüm değerleri siler.</td>
+                </tr>
+                <tr>
+                    <td>veri</td>
+                    <td>Verilen verideki değerleri gösterir.</td>
+                </tr>
+                <tr>
+                    <td>varMı</td>
+                    <td>Verilen veri bulunuyor mu, bulunmuyor mu "true - false" biçiminde gösterir.</td>
+                </tr>
+                <tr>
+                    <td>ekle</td>
+                    <td>Verilen veri bir "Array" ise verilen değeri ekler.</td>
+                </tr>
+                <tr>
+                    <td>çıkar</td>
+                    <td>Verilen veri bir "Array" ise verilen değeri çıkarır.</td>
+                </tr>
+                <tr>
+                    <td>arttır</td>
+                    <td>Verilen veri bir "Sayı" ise verilen değer ile bulunan veriyi toplayarak arttırır.</td>
+                </tr>
+                <tr>
+                    <td>azalt</td>
+                    <td>Verilen veri bir "Sayı" ise verilen değeri bulunan veriden çıkararak azaltır.</td>
+                </tr>
+                <tr>
+                    <td>tümVeriler</td>
+                    <td>Veritabanındaki tüm verileri gösterir.</td>
+                </tr>
+                <tr>
+                    <td>tümVerilerSil</td>
+                    <td>Veritabanındaki tüm verileri siler.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="veritabanıKullanım" class="tabcontent">
+            <h1><b>Veritabanı sistemi kullanım örneği</b></h1>
+            <pre>
+                <code class="javascript">
+    client.veritabanı.ayarla('kullanıcı.isim', 'Örnek isim xxx')
+    //"kullanıcı" verisindeki "isim" alanına "Örnek isim xxx" değerini kaydeder.
+                     
+    client.veritabanı.veri('kullanıcı.isim')
+    //"kullanıcı" verisindeki "isim" alanındaki değeri gösterir.
+                     
+    client.veritabanı.varMı('kullanıcı.isim')
+    //"kullanıcı" verisinde "isim" alanı var mı, yok mu "true - false" biçiminde gösterir.
+                     
+    client.veritabanı.sil('kullanıcı.isim')
+    //"kullanıcı" verisindeki "isim" alanını siler.
+                </code>
+            </pre>
+        </div>
+
+        <div id="argsYoksa" class="tabcontent">
+            <h1><b>Komut taslağı</b></h1>
+            <p>Argüman (args) yoksa</p>
+            <pre>
+                <code class="javascript">
+    module.exports = {
+        komut: "", //komut adı 
+        açıklama: "", //komut açıklaması
+        kategori: "", //ilk örnekteki kategori oluşturma kısmına göre buraya tam olarak ne yazabileceğinizi anlayacaksınız. (komut kategorisi)
+        alternatifler: [], //komutun asıl adı dışında kullanılabileceği alternatifler. Örneğin; (komut adını x olarak düşünürsek) alternatifler: ["y", "z"], olabilir mesela.
+        kullanım: "", //komutun doğru kullanımı
+        yetki: 'MANAGE_MESSAGES', /*Komutu kullanabilecek yetkiyi belirtiyorsunuz.
+        Tüm yetkileri https://discordapp.com/developers/docs/topics/permissions adresinden öğrenebilir/görebilirsiniz.
+        Eğer gereken yetki bot sahibi olacaksa "BOT_OWNER" yazınız.
+        Eğer hiç bir yetki gerekmiyor ise yetki: "" alanını siliniz.
+        */
+    };
+                     
+    module.exports.baslat = (client, message) => {
+        //Komutun yapacağı işlevlerin geleceği alan.
+        message.channel.send("Test.")
+    };
+                </code>
+            </pre>
+        </div>
+
+        <div id="argsVarsa" class="tabcontent">
+            <h1><b>Komut taslağı</b></h1>
+            <p>Argüman (args) varsa</p>
+            <pre>
+                <code class="javascript">
+    module.exports = {
+        komut: "", //komut adı 
+        açıklama: "", //komut açıklaması
+        kategori: "", //yukarıdaki kategori oluşturma kısmına göre buraya tam olarak ne yazabileceğinizi anlayacaksınız. (komut kategorisi)
+        alternatifler: [], //komutun asıl adı dışında kullanılabileceği alternatifler. Örneğin; (komut adını x olarak düşünürsek) alternatifler: ["y", "z"], olabilir mesela.
+        kullanım: "", //komutun doğru kullanımı
+        yetki: 'MANAGE_MESSAGES', /*Komutu kullanabilecek yetkiyi belirtiyorsunuz.
+        Tüm yetkileri https://discordapp.com/developers/docs/topics/permissions adresinden öğrenebilir/görebilirsiniz.
+        Eğer gereken yetki bot sahibi olacaksa "BOT_OWNER" yazınız.
+        Eğer hiç bir yetki gerekmiyor ise yetki: "" alanını siliniz.
+        */
+                            
+        args: [
+          {
+            anahtar: 'x', //module.exports.baslat kısmında bu argsın cevabı "args.x" olarak çekilecektir. Siz bu "x"'i kendinize göre değiştirip ayarlarsınız. Ne olduğunu anladınız zaten.
+            soru: '', //Argüman sorusu. Örneğin; "Bir yazı yazınız."
+            tip: 'yazi' /*Argüman tipi.
+            Buraya gelebilecek tipler:
+            yazi = Normal herhangi bir yazı.
+            sayi = Normal herhangi bir sayı.
+            kullanici = Bulunulan sunucudaki kullanıcıları algılar. Kullanıcı adı yazarak veya kullanıcıyı etiketleyerek çalışır.
+            kanal = Bulunulan sunucudaki kanalları algılar. Kanal adı yazarak veya kanalı etiketleyerek çalışır.
+            rol = Bulunulan sunucudaki rolleri algılar. Rol adı yazarak veya rolü etiketleyerek çalışır.
+            */
+          }
+        ]
+    };
+                         
+    module.exports.baslat = (client, message, args) => {
+        //Komutun yapacağı işlevlerin geleceği alan.
+        message.channel.send(args.x) //anahtar kısmı "x" olan Argümanın cevabını alıp bulunulan kanala gönderiyoruz.
+    };
+                </code>
+            </pre>
+        </div>
+
+    </body>
+</html>
